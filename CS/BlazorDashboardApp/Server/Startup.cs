@@ -27,17 +27,21 @@ namespace BlazorDashboardApp.Server {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddDevExpressControls();
-            services.AddMvc()
-                    .AddDefaultDashboardController(configurator => {
-                        configurator.SetDashboardStorage(new DashboardFileStorage(FileProvider.GetFileInfo("App_Data/Dashboards").PhysicalPath));
-                        configurator.SetDataSourceStorage(new DataSourceInMemoryStorage());
-                        configurator.SetConnectionStringsProvider(new DashboardConnectionStringsProvider(Configuration));
-                        configurator.ConfigureDataConnection += Configurator_ConfigureDataConnection;
-                    });
+            services.AddMvc();
+
+            services.AddScoped<DashboardConfigurator>((IServiceProvider serviceProvider) => {
+                DashboardConfigurator configurator = new DashboardConfigurator();
+                
+                configurator.SetDashboardStorage(new DashboardFileStorage(FileProvider.GetFileInfo("App_Data/Dashboards").PhysicalPath));
+                configurator.SetDataSourceStorage(new DataSourceInMemoryStorage());
+                configurator.SetConnectionStringsProvider(new DashboardConnectionStringsProvider(Configuration));
+                configurator.ConfigureDataConnection += Configurator_ConfigureDataConnection;
+
+                return configurator;
+            });    
         }
 
         private void Configurator_ConfigureDataConnection(object sender, ConfigureDataConnectionWebEventArgs e) {
@@ -79,7 +83,7 @@ namespace BlazorDashboardApp.Server {
             app.UseRouting();
 
             app.UseEndpoints(endpoints => {
-                EndpointRouteBuilderExtension.MapDashboardRoute(endpoints, "api/dashboard");
+                EndpointRouteBuilderExtension.MapDashboardRoute(endpoints, "api/dashboard", "DefaultDashboard");
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
