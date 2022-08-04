@@ -15,7 +15,7 @@ This example shows how you can configure the `DxDashboard` component in a Blazor
 
 ## Files to Look At
 
-* [Dashboard.razor](./CS/BlazorDashboardApp/Client/Pages/Dashboard.razor)
+* [Dashboard.razor](./CS/BlazorDashboardApp/BlazorDashboardApp.Client/Pages/Dashboard.razor)
 
 ## Documentation
 
