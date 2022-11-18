@@ -13,8 +13,7 @@ This example shows how you can configure the `DxDashboard` component in a Blazor
 - The [DxBackendOptions.RequestHttpHeaders](https://docs.devexpress.com/Dashboard/DevExpress.DashboardBlazor.DxBackendOptions.RequestHttpHeaders?v=21.1) property adds the `Authorization` header.
 - The [Data Inspector](https://docs.devexpress.com/Dashboard/DevExpress.DashboardBlazor.DxDataInspector?v=21.1) is enabled and displays raw and aggregated data.
 
-## Files to Look At
-
+## Files to Review
 * [Dashboard.razor](./CS/BlazorDashboardApp/BlazorDashboardApp.Client/Pages/Dashboard.razor)
 
 ## Documentation
