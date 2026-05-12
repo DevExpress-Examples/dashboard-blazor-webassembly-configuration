@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "BlazorDashboardApp.Server": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:1725;http://localhost:1726"
+    }
+  }
+}
